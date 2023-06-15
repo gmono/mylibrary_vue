@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <Container id="nav">
         <HelloWorld/>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
@@ -10,17 +10,26 @@
       <rect x="100" y="100" width="100" height="100" fill="yellow"> </rect>
     </svg>
 
-  </div>
+    <Movable >
+      <template v-slot="{x,y}">
+        <div style="background-color: antiquewhite;height: 100px;width: 100px;position:absolute;" :style="{transform:`translate(${x}px,${y}px)`}">
+        {{ x }},{{ y }}
+        </div>
+      </template>
+    </Movable>
+
+  </Container>
   
   <router-view />
 </template>
 
-<script>
+<script lang="ts">
 import {delay} from "ts-pystyle"
-import HelloWorld from "./components/HelloWorld.vue"
-
+// import HelloWorld from "./components/HelloWorld.vue"
+ import Container from "./components/FormPanel.vue"
+import Movable from "./components/Movable.vue";
 export default {
-  components:{HelloWorld},
+  components:{ Container, Movable },
   data(){
     return {
       size:100,
